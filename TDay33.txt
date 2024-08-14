@@ -1,0 +1,13 @@
+Q)How to use parameters even after rendering the component i.e., when reusing the component
+A)consider we have a component. where we are displaying the currentCourse details
+consider there are two buttons called "Previous" and "Next"
+
+First Time Only
+this._activatedRoute.snapshot.paramMap.get('id')
+
+Reusing
+this._activatedRoute.paramMap.subscribe(params: ParamMap) => {
+	params.get('id');
+})'
+
+Here we are using the subscribe method, so whenever there is any change in the url parameters, we will get the new ones without any issue.

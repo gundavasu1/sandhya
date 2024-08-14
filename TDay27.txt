@@ -1,0 +1,36 @@
+Q)How router module will work
+A)we have to put <router-outlet> tag in app.component.html
+Then router module will work
+
+Q)How component will get displayed while using routing
+A)component will get displayed wherever we put the <router-outlet> tag
+
+Q)How to create service
+A)ng g s services/course
+
+Q)How many files will get created when we try to create service
+A)Two files will get created i.e.,
+serviceName.service.ts
+serviceName.service.spec.ts
+
+service will get added to serviceName
+It is just like component too
+
+Q)what is provider
+A)we will mention the list of services that are available to a component in providers array. This is called registering the services in this component or its children
+@Component({
+  selector: 'app-test',
+  templateUrl: './test.component.html',
+  styleUrls: ['./test.component.css'],
+  providers: [CourseService]
+})
+
+Then we can use this service either in this component or its children
+
+Note:- Always try to use suggestions, then it will get imported automatically
+
+Q)How can we use a service across the application
+A)we have to register the service in root module 
+i.e., app.module.ts
+providers: [CourseService],
+

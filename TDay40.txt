@@ -1,0 +1,11 @@
+Q)Do we need to configure routes for pipe
+A)No
+
+Q)How to import MatFormFieldModule
+A)goto material.angular.io --> click components --> select Form Field on LHS --> click API tab --> copy
+
+Q)what is pure and impure pipe
+A)By default when we create a pipe, it will be pure
+pure pipe means, it won't allow dynamic changes
+impure pipe allows dynamic changes
+

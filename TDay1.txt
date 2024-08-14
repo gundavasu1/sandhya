@@ -1,0 +1,35 @@
+Q)what is the problem in using javascript to build web application and how angular overcomes
+A)
+Browser Compatibility
+Page Refresh
+
+Q)Explain how angular overcomes browser compatibility issue
+A)We have to take care of browser compatibility. Otherwise it won't work
+
+eg:- consider if we build an application by keeping internet explorer in mind. Then we may face issues if we try to run the application in another browser because of browser incompatibility.
+
+But if we develop web application using angular, then we don't write the code in javascript. Instead we will write in typescript. But browser cannot understand typescript. That's why we will use transpiler which reads typescript and converts into javascript based on the browsers we are using.
+
+Then if we run the application in any browser, we don't face any issue.
+
+Q)Explain how angular overcomes page refresh issue
+A)we will load the entire page in javascript based application. we don't refresh the entire page. instead we use single page application in which we update only the required change by not touching non required ones.
+
+Note:- we can do the same in javascript application by using ajax and tiles functionality, but we don't use ajax all over the application.
+
+Q)what is the difference between angularjs and angular
+A)
+->angularjs application is developed using javascript, 
+whereas angular application is developed using typescript
+
+->AngularJS follows MVC architecture
+Angular follows component based architecture
+
+->AngularJS doesn't have CLI tool. 
+Angular have CLI tool. CLI means Command Line interface
+
+->AngularJS doesn't use dependency injection
+Angular uses dependency injection
+
+->AngularJS doesn't support mobile application
+Angular supports mobile application

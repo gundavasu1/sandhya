@@ -1,0 +1,6 @@
+Q)How to give our css class to a button when active
+A)Consider we have 5 buttons. 
+we would like give our custom class when clicked i.e., active
+<button mat-raised-button color="primary" routerLink="/courseDetails">Course Details<button>
+to
+<button mat-raised-button color="primary" routerLink="/courseDetails" routerLinkActive="myCssClass">Course Details<button>

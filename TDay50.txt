@@ -1,0 +1,105 @@
+Q)How to access properties of a child in html file
+A)we know we can access the properties of typescript file from its corresponding html file by using interpolation i.e., {{}}
+In the same way, access the methods i.e., single paranthesis ()
+In the same way, binding the attributes using square bracket []
+
+consider we have parent component (app) and it contains a child component (header)
+Then parent cannot access the properties of child components typescript
+This can be done with the help of template reference
+Template reference is nothing but assigning a name to the child component in the parent component
+Then we will use this template reference name and access the properties of child
+
+eg:-
+app.component.html
+
+<app-header #headerComponent></app-header>
+<app-page1 [hidden]="headerComponent.myVar !== 1"></app-page1>
+
+Here app component has two components i.e., header component and page1 component
+header component has a variable called myVar
+
+By using headerComponent variable, we are hiding another child component i.e., page1 component
+
+Here hidden attribute expression will either be true or false. Accordingly we can know whether the component will be hidden or not.
+
+Q)How to read child properties from parent in html page
+A)By using templateReferenceVariable
+
+Q)what is the need of using template reference while a parent is accessing its child properties
+A)Because a parent component can contain any no.of child components inside it. eg: app component has many child components
+Then we cannot judge which child component property to consider. 
+To distinguish which child component, we will use template reference
+
+Q)what is the issue with templateReferenceVariable
+A)html page will get loaded from top to bottom.
+templateReferenceVariable must be declared first. Then the subsequent components can use templateReferenceVariable. Otherwise its not possible.
+
+Q)How to access child component class from parent component class file instead of html file
+A)
+app.component.ts
+
+export class AppComponent{
+	
+	@ViewChild('footer', {strict:true})
+	footerComponent : FooterComponent;
+	
+	updateLastAccessed(){
+		this.footerComponent.lastAccessed = new Date().toString();
+	}
+}
+
+app.component.html
+
+<app-footer #footer></app-footer>
+<button (click)="updateLastAccessed()">MyButton</button>
+
+explanation:- in app.component.ts file, we are declaring a variable called footerComponent of type FooterComponent.
+But we cannot get the instance automatically. we need to instantiate it.
+Since we are using the footer commponent i.e., <app-footer> in app.component.html, we can provide a templateReferenceVariable as
+<app-footer #footer></app-footer>
+
+Then we need to use this templateReferenceVariable in the class file i.e., 
+@ViewChild('footer', {strict:true})
+footerComponent : FooterComponent;
+
+so we got FooterComponent instance i.e., footerComponent.
+
+Then we can use this instance to call its properties.
+
+Q)How to add a templateReferenceVariable to a tag
+A)We can give a name just like an attribute to the tag. We should prepend the name with #
+eg: <app-footer #footer></app-footer>
+
+Q)Can we read and write the child properties of class file from parent class file
+A)yes. since we got handle to the child component in parent class file. We can both read and write
+
+Q)How to debug angular application
+A)step 1: put breakpoint in the required typescript file just like in java class
+
+step 2: run --> debug --> edit configurations --> plus --> javascript debug --> Then it will create a default configuration --> 
+Then update the default configuration i.e., 
+
+Name : you can give whatever the name you want
+URL : http://localhost:4200 i.e., whatever the url you will use to run the application
+Broswer : chrome (preferable)
+
+step 3 : click Debug button
+
+Then a new browser window will get opened with debug console where we can see the variable data, stepInto, stepOver, stepReturn buttons.
+
+Q)How to change the value of a variable while debugging
+A)first we need to be in debug mode i.e., at some breakpoint
+IN Debug window, we can see lot of options like 
+Debugger, Console, Scripts, stepInto, stepOver, stepReturn etc
+
+so switch to console window --> At the bottom we can see a cursor --> we can add code whatever you want to change
+
+eg:- currently in our code we are at 
+if(book.author === 'james'){
+
+}
+
+But our current book.author is 'matt'. we can change it to 'james' if needed i.e., 
+
+at the cursor --> we need to type the same but 
+book.author === 'matt' 

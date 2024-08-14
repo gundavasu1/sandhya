@@ -1,0 +1,76 @@
+Q)How to get data from class to view
+A)we can do in two ways 
+1. interpolation
+2. property binding
+
+Q)How to skip test file while creating component
+A)ng g c components/interpolation --skip-tests=true
+
+Q)explain interpolation
+A)we can access the member(property or method) of class using double curly braces in html
+{{propertyName}}
+propertyName should be public. Otherwise we cannot access outside the class
+
+Q)explain modifiers
+A)private, protected ,public
+public is default
+
+Q)write a program to access property of class in html to write "Hello Srinivas"
+A)
+way 1:
+<h2>{{"Hello " + name}}</h2>
+way 2:
+<h2>Hello {{name}}</h2>
+
+Q)wap to display length of property class
+A)<h2> my name length is {{name.length}}</h2>
+Here name is of string. we can get suggestions just like java
+
+Q)where can we use backticks for string
+A)only class but not view
+
+Q)wap to access method of class using interpolation
+A)
+getMyName(){
+	return "hi srini"
+}
+
+<h2>{{getMyName()}}</h2>
+
+Q)wap to access method of class using interpolation but access property of class from the method
+A)ts:
+export class InterpolationComponent {
+  
+  public name : string = `Satish Konduru`
+
+  getMyName(){
+    return `hi ${this.name}`
+  }
+}
+
+html:
+<h2>{{getMyName()}}</h2>
+
+Q)Can we assign value in interpolation i.e., {{x=10}}
+A)No
+
+Q)Can we increment a variable in interpolation
+A)No, because it is kind of assignment only
+{{x++}} is nothing but {{x = x+1}}
+
+Q)Can we use global object properties in interpolation
+A)No 
+{{window.location.href}}
+But we can create a variable in class file and access in view file
+
+eg:
+class:
+export class InterpolationComponent {
+ public myLocation=window.location.href
+}
+
+view:
+{{myLocation}}
+
+Q)interpolation is which way data binding
+A)one way data binding i.e., from class to view

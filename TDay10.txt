@@ -1,0 +1,38 @@
+Q)what is the default module of angular application
+A)app
+
+Q)what is the default component of app module
+A)app
+
+Q)what are the building blocks of angular application
+A)components, services, modules, guards, interceptors, pipes
+
+Q)How to create a component
+A)cmd>app folder ->ng generate component components/test
+or
+ng g c components/test
+
+we are telling to create test component under components folder. since components folder is not there, it will create and then creates test component. we don't need to mention "component" name. Then it creates the following four files i.e.,
+
+src -> app -> components -> test ->
+test.component.html
+test.component.ts
+test.component.css
+test.component.spec.ts
+
+Q)How can we skip test file while creating component
+A)ng g c components/test --skip-tests=true
+
+Q)what is the naming convention of selector
+A)<app-componentName>
+
+Q)where the component files will get created when we try to create from command prompt
+A)In command prompt, we will move to projectName --> we will issue the command --> Then our component will get created under src/app folder.
+
+eg:
+cmd>project folder ->ng generate component components/test
+Then components folder will get created under src/app folder.
+
+
+
+

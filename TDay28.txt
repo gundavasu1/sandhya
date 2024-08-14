@@ -1,0 +1,117 @@
+Q)Difference between registering and injecting the service
+A)if we put a service in providers array, then it is called registering. Then it is eligible to use it.
+Then we have to inject that service whatever the components we like
+
+Q)when ngOnInit() will get executed
+A)whenever the component first comes on to the browser, it will get executed. It never gets executed again.
+
+Q)what is the first method which executes i.e., ngOnInit or constructor
+A)constructor first.
+when we talk about class, constructor gets executed first
+when we talk about component, ngOnInit first
+when we talk about both, then constructor will get executed first
+
+
+Q)wap to demonstrate service
+A)
+=======
+Before
+=======
+export class CourseDetailsComponent {
+  public cDetails=[
+    {id:1, name:'Angular', fee:25000},
+    {id:2, name:'React', fee:15000},
+    {id:3, name:'Bootstrap', fee:10000}
+  ]
+  
+  constructor() { 
+
+  }
+  
+  ngOnInit(): void {
+    
+  }
+}
+=====
+After
+=====
+export class CourseDetailsComponent implements OnInit{
+  
+  public cDetails=[
+  ]
+
+  constructor(private _cService:CourseService) { 
+
+  }
+  
+  ngOnInit(): void {
+    this.cDetails=this._cService.getCourseDetails();
+  }
+  
+}
+=================
+course.service.ts
+=================
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class CourseService{
+
+  getCourseDetails(){
+    return [
+      {id:1, name:'Angular', fee:25000},
+    {id:2, name:'React', fee:15000},
+    {id:3, name:'Bootstrap', fee:10000}
+    ]
+  }
+  
+}
+
+explanation:-
+-> In service class, we are providing data to a method
+-> We have mentioned @Injectable in service class. And provider is root, so we can use this service across the application
+-> We are injecting this service in constructor method of each component. So we are making it available for the component to use it.
+-> whenever the component first renders on browser, ngOnInit method will get executed. So, here we are getting data from service and assigning to the component's variable
+
+Q)what is subscription
+A)To get the data(i.e., Observable) of server by Service
+Component has to subscribe.
+Component can subscribe by Component's constructor i.e., we will create a parameter to the constructor.
+Then whenever the component is renders in UI, ngOnInit method will get executed.
+By this time Component has got handle of service instance.
+Then we will get the data from service --> process it --> assign to component variable. --> then it is available to html
+
+eg:
+export class CourseDetailsComponent implements OnInit{
+  
+  public cDetails=[
+  ]
+
+  constructor(private _cService:CourseService) { 
+
+  }
+  
+  ngOnInit(): void {
+    this.cDetails=this._cService.getCourseDetails();
+  }
+  
+}
+
+Q)What issue did you get when you tried to get the data from server
+A)It displayed as [object Object]
+To overcome this, we have mention the datatype in the components variable i.e.,
+cDetails:Object[]; instead of cDetails[];
+
+Q)what are the guidelines for private and public variables
+A)private - start with underscore then camelCase
+eg:
+private _cService: CourseService
+
+public - just camelCase
+public cService: CourseService
+(or)
+cService: CourseService
+Because public is default.
+

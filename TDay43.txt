@@ -1,0 +1,20 @@
+Q)what is Multicasting Observable
+A)It is a process where we want to share an Observable across components
+The component will get the data according to the time that it make a request.
+
+Q)Difference between Multicasting Observable and individual Observable
+A)consider we have two components A & B
+
+with individual Observable:-
+----------------------------
+each component will subscribe to a service. Then service will provide the Observable back to component
+Here we will create separate instances to the same service in each component
+consider the service is emitting data as 1,2,3,4,5
+consider A did subscribe, then it get data 1,2,3
+Then B did subscribe, then it get data 1,2,3 (it will get from starting)
+
+with Multicasting Observable:-
+-------------------------------
+Here we will have same instance to the service for all of subscribed components
+consider A did subscribe, then it get data 1,2,3
+Then B did subscribe, then it get whatever A is getting from now onwardsi.e., 4,5 but not 1,2,3,4,5

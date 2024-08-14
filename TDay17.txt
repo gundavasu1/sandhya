@@ -1,0 +1,97 @@
+Q)what are directives and types
+A)Directives are classes that add additional behavior to elements in your Angular applications
+
+There are 3 types of directives. They are
+Attribute Directives (ngStyle, ngClass)
+Structural Directives (ngIf, ngStyle, ngFor)
+Component Directives (@Component, @ViewChild, @Input, @Output)
+@Injectable
+
+Q)Tell some ng's
+A)ngModel
+ngClass
+ngStyle
+ngIf
+ngSwitch
+ngCase
+ngFor
+ngModule
+ngTemplate
+
+
+Q)what are structural directives
+A)
+if
+switch
+for
+
+Q)explain if structural directive and demonstrate
+A)
+shows tag based on condition
+we have to use * mark in front of ngIf.
+But there is a way not to use * mark. 
+
+html:
+<h2>Structural Directive : IF</h2>
+<br><hr>
+<h2 *ngIf="false">heading 1</h2>
+<h2 *ngIf="check">heading 2</h2>
+<h2>heading 3</h2>
+
+ts:
+export class IfComponent {
+  public check=false
+}
+
+explanation:
+mentioning the value of boolean in the tag itself
+<h2 *ngIf="false">heading 1</h2>
+
+getting the boolean from typescript 
+<h2 *ngIf="check">heading 2</h2>
+
+Q)explain if structural directive based on template reference variable
+A)This is just like ternary operation
+if the condition is true, display one block. 
+else another block
+
+
+html:
+<h2>Structural Directive : IF</h2>
+<br><hr>
+<h2 *ngIf="check ; else eBlock">True Block</h2>
+<ng-template #eBlock>
+    <h2>False Block 1</h2>
+	<h2>False Block 2</h2>
+	<h2>False Block 3</h2>
+</ng-template>
+
+ts:
+export class IfComponent {
+  public check=false
+}
+
+Q)explain if structural directive with multiple statements
+A)
+
+html:
+<h2>Structural Directive : IF</h2>
+<br><hr>
+<h2 *ngIf="check ;then tBlock else eBlock">True Block</h2>
+
+<ng-template #tBlock>
+    <h2>True Block 1</h2>
+    <h2>True Block 2</h2>
+    <h2>True Block 3</h2>
+</ng-template>
+
+<ng-template #eBlock>
+    <h2>False Block 1</h2>
+    <h2>False Block 2</h2>
+    <h2>False Block 3</h2>
+</ng-template>
+
+ts:
+export class IfComponent {
+  public check=false
+}

@@ -1,0 +1,51 @@
+Q)explain for structural directive iterate through properties of an object
+A)
+html:
+<h2>for structural directive</h2>
+<h3 *ngFor="let x of emp | keyvalue">
+    {{x.key}} --- {{x.value}}
+</h3>
+
+ts:
+export class ForComponent {
+ public emp = {
+  id: 1,
+  name: "srini",
+  age : 43
+ } 
+}
+
+explanation:
+we have to use the keyword "keyvalue" to get key and value of each property of our object
+Then only we can use "key" and "value" 
+
+output:
+age--43
+id--1
+name--srini
+
+Q)How to iterate through array of objects
+A)
+
+html:
+<h2>for structural directive</h2>
+<h3 *ngFor="let x of emp">
+    <h3 *ngFor="let y of x | keyvalue">
+    {{y.key}} --- {{y.value}}
+    </h3>
+    <hr>
+</h3>
+
+ts:
+export class ForComponent {
+	 public emp = [
+	  {  id: 1,  name: "srini1",  age : 431 },
+	  {  id: 2,  name: "srini2",  age : 432 }, 
+	  {  id: 3,  name: "srini3",  age : 433 } 
+	]
+}
+
+explanation:
+iterating through emp array and getting object
+then iterating through that object properties 
+then printing the object property and value using keyvalue

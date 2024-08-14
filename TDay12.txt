@@ -1,0 +1,92 @@
+Q)ways of one way data binding
+A)communication between view to class (or) class to view
+
+class to view
+---------------
+interpolation : 
+property binding : 
+class binding : 
+style binding :
+
+view to class
+---------------- 
+event binding :
+
+Q)what is two-way data binding
+A)view to class & class to view
+ngModel
+
+Q)what is the name of the folder when we use the command "ng g c components\pBinding"
+A)we are creating the component "pBinding" under components folder
+angular will use only small letters. That's why it converts camel case to hiphen
+selector also follows the same. 
+
+Q)what is the folder name, selector and class when we try to create a component using "ng g c components\pBinding"
+A)src/app :- p-binding
+selector : app-p-binding
+class : PBindingComponent
+
+Q)what is the difference between attribute and property
+A)consider
+<input type="text" value="RSK Helpline"></input>
+Here input is the tag
+type and value are attributes
+Also properties
+
+attribute value won't get changed, whereas property value gets changed
+
+Q)How can we know programatically attribute is not changing and property is changing
+A)
+create a text field 
+<input type='text' value='RSK'>
+inspect the text field in UI --> Developer tools will get opened --> open console window --> 
+type 
+if we consider as attribute
+$0.getAttribute('value') 
+output : RSK
+
+if we consider as property
+$0.value
+output : RSK
+
+if we change the value to 'update' in UI
+Then 
+$0.getAttribute('value') 
+output : RSK
+
+$0.value
+output : update
+
+That is, we are dealing with DOM values but not attribute values.
+
+Q)what is property binding
+A)binding the data with DOM value instead of attribute value
+
+Q)explain property binding i.e., class property to html field
+A)we have property in class file
+we are assigning that value to text field with the help of class's property
+
+p-binding.component.html
+<input type="text" value="{{myName}}">
+
+p-binding.component.ts
+export class PBindingComponent {
+  public myName='Satish'
+}
+
+Note:- if we try to check using dev tools, we will get 
+null for $0.getAttribute('value')
+myName data for $0.value
+
+Q)explain property binding using square brackets
+A)
+p-binding.component.html
+---------------------------
+<input [value]="myName">
+
+p-binding.component.ts
+---------------------------
+export class PBindingComponent {
+  public myName='Satish'
+}
+

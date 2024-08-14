@@ -1,0 +1,91 @@
+Q)explain switch structural directive
+A)will use when we have list of choices instead of just true/false
+
+html:
+<h2>switch structural directive</h2>
+<h3 [ngSwitch]="myChoice">
+    <h2 *ngSwitchCase="'one'">
+        <h1>one related statements</h1>
+    </h2>
+    <h2 *ngSwitchCase="'two'">
+        <h1>two related statements</h1>
+    </h2>
+    <h2 *ngSwitchCase="'three'">
+        <h1>three related statements</h1>
+    </h2>
+	<h2 *ngSwitchDefault>
+        <h1>default related statements</h1>
+    </h2>
+</h3>
+
+ts:
+export class SwitchComponent {
+  public myChoice="two"
+}
+
+Q)How to define array
+A) 
+way 1:
+public names= ['one','two','three']
+  
+way 2:
+public names : string[] = ['one','two','three']
+
+Q)explain for structual directive
+A)it is just like forEach statement of java
+
+html:
+<h2>for structural directive</h2>
+<h3 *ngFor="let x of names">
+    {{x}}
+</h3>
+
+ts:
+public names= ['one','two','three']
+
+output:
+one
+two
+three
+
+Q)How to display index of array using for directive
+A)
+<h2>for structural directive</h2>
+<h3 *ngFor="let x of names; index as my">
+    {{x}} --- {{my}}
+</h3>
+
+ts:
+public names= ['one','two','three']
+Note:- index is keyword
+
+output:
+one--0
+two--1
+three--2
+
+Q)explain first keyword in for directive
+A)
+<h2>for structural directive</h2>
+<h3 *ngFor="let x of names; first as my">
+    {{x}} --- {{my}}
+</h3>
+
+ts:
+public names= ['one','two','three']
+Note:- first is keyword
+
+output:
+for structural directive
+one --- true
+two --- false
+three --- false
+
+explanation:
+true rendered for first statement. Remaining are false
+
+Q)what are keywords in for structural directive
+A)index, first, last, even, odd
+renders true accordingly
+
+To display keyvalue pairs of object properties, use keyvalue

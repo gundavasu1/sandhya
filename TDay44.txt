@@ -1,0 +1,76 @@
+Q)explain subscription with data emission for multiple subscribers
+A)
+export class Test1Component implements OnInit{
+  
+  ngOnInit(): void {
+    const obs = new Observable(this.getData)
+    obs.subscribe(v => console.log("subscription 1: " + v));
+	//obs.subscribe(v => console.log("subscription 2: " + v));
+  }
+  
+  getData(data){
+    let counter = 0
+    setInterval(() => {
+      console.log("Data: " + counter)
+      data.next(counter);
+      counter++
+    }, 2000)
+  }// end of getData
+}
+
+explanation:-
+we are creating Observable in ngOnInit, so this will get triggered once we render the component in UI
+we are supplying data to Observable with the help of another function i.e., getData
+Observable won't get data from function until we subscribe
+so we will get output as
+Data: 0
+Subscription 1: 0
+Data: 1
+Subscription 1: 1
+
+Now uncomment for another subscription, then the output will be 
+Data: 0
+Subscription 1: 0
+Data: 0
+Subscription 2: 0
+Data: 1
+Subscription 1: 1
+Data: 1
+Subscription 2: 1
+
+note:- Here we can see "Data: x" multiple times because of multiple subscribers.
+
+Q)explain multicast observable
+A)same data will get shared to multiple subscribers
+eg:
+export class Test1Component implements OnInit{
+  
+  ngOnInit(): void {
+    const obs = new Observable(this.getData)
+    const shared = new Subject()
+    //obs.subscribe(v => console.log("subscription 1: " + v));
+    //obs.subscribe(v => console.log("subscription 2: " + v));
+    shared.subscribe(v => console.log("subscription 1: " + v))
+    shared.subscribe(v => console.log("subscription 2: " + v))
+    obs.subscribe(shared)
+  }
+  
+  getData(data){
+    let counter = 0
+    setInterval(() => {
+      console.log("Data: " + counter)
+      data.next(counter);
+      counter++
+    }, 2000)
+  }// end of getData
+}
+
+output:
+Data: 0
+Subscription 1: 0
+Subscription 2: 0
+Data: 1
+Subscription 1: 1
+Subscription 2: 1
+
+note:- Here we can see "Data: x" single time even we have multiple subscribers. Because we used subject

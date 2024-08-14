@@ -1,0 +1,7 @@
+Q)How to see list of commands in angular
+A)
+-> go to angular official website i.e., angular.io --> Docs --> Reference --> CLI Command Reference
+-> https://angular.io/cli
+
+Q)how to uninstall angular software 
+A)npm uninstall -g @angular/cli

@@ -1,0 +1,53 @@
+Q)explain class with an example
+A)export{}
+class Employee{
+    
+    empName:string
+
+    constructor(name:string){
+        this.empName=name
+    }
+
+    greet(){
+        console.log(`Hi Welcome Mr. ${this.empName}`)
+    }
+}
+
+let emp1 = new Employee('RSK')
+emp1.greet()
+
+output:
+Hi Welcome Mr. RSK
+
+Q)explain inheritance
+A)just like java, we have to use extends keyword. Also we can use super keyword
+
+export{}
+class Employee{
+    
+    empName:string
+
+    constructor(name:string){
+        this.empName=name
+    }
+
+    greet(){
+        console.log(`Hi Welcome Mr. ${this.empName}`)
+    }
+}
+
+class Manager extends Employee{
+
+    constructor(mngName:string){
+        super(mngName)
+    }
+}
+
+let x = new Manager('Gopi')
+console.log(x.greet())
+
+Q)explain modifiers in typescript
+A)private, protected, public
+public is default i.e., if we don't mention, then it considers as public
+
+working is just like java

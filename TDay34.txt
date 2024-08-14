@@ -1,0 +1,15 @@
+Q)what are optional route parameters
+A)we have to send in the form of object 
+eg:
+this._router.navigate(['myPath'], {id: this.myParam});
+
+Q)With material, we can get three colors i.e., Primary, Warn, Accent. How can we add another color
+A)create own css color and refer in UI
+eg:
+<button mat-raised-button color="my-primary"">Course Details<button>
+
+css:
+.mat-my-primary{
+	write whatever you like
+}
+

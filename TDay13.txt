@@ -1,0 +1,214 @@
+Q)How can we write css
+A)
+by tagName:
+
+tagName{
+	text-align : center;
+	color : blue;
+}
+
+by class
+
+.className{
+	color : green
+}
+
+by id
+#id{
+	color : green
+}
+
+Q)Explain css with an example
+A)we can use code suggest in visual studio code to write css
+
+html:
+<h2 class="textStyle">Hello World</h2>
+
+css:
+h2{
+    text-align: center;
+    color: blueviolet;
+}
+
+.textColor{
+    color: green;
+}
+
+.textSize{
+    font-size: 40px;
+}
+
+.textStyle{
+    color: blue;
+}
+
+control goes to css file and finds our configured class
+Then displays on UI accordingly
+
+Q)what is class binding
+A)Usually we will mention the class property value in html tag.
+That property value will be checked in css file and displays in UI accordingly
+
+eg:
+html:
+<h2 class="myTextColor">Hello World</h2>
+
+css:
+.myTextColor{
+	color : green
+}
+we are providing a class to the tag i.e., we are not using any binding i.e., square brackets
+
+But in class binding,
+we will bind class property value with typescript property
+Then this typescript property value will be checked in css.
+
+eg:
+html:
+<h2 [class]="myText1">Hello World</h2>
+
+ts:
+export class CBindingComponent {
+  public myText1="textColor"
+}
+
+css:
+.textColor{
+    color: green;
+}
+
+explanation:-
+->angular tries to load the html in UI
+->as soon as it see's square brackets around class property of tag, it understands that user is binding a property in ts
+->Then control goes to ts file and finds the property myText1 and gets the property value i.e., textColor
+->Then control goes to css file and finds the textColor
+->Then applies the css configuration to UI tag
+
+Q)explain class binding conditionally
+A)we will mention the class in html tag
+This class will present in css file
+But should we apply the css style based on the property of ts
+
+eg:
+html:
+<h2 [class.textColor]="isRequired">Hello World</h2>
+
+ts:
+export class CBindingComponent {
+  public isRequired=true
+}
+
+css:
+.textColor{
+    color: green;
+}
+
+Q)what is hoisting
+A)-> we may declare and define variables in javascript file at various places
+->when we compile the file, all the variables will move to the top most. variables won't move if it under function
+->Then these variables can be used anywhere in the file
+->javascript compiles the code from top to botton. So it will find the variable before using. we don't have any problem
+
+This moving of variables to the top while compiling is called hoisting
+
+Q)How to overcome hoisting issue in typescript
+A)once we compile the typescript file, variables won't get moved to the top of the page like javascript
+That's why we have to declare the variables before using them
+
+Q)How can we apply multiple styles of css to a tag i.e., groupStyling
+A)we know how to apply a style to a tag using class binding
+
+eg:
+html:
+<h2 [class.textColor]="isRequired">Hello World</h2>
+
+ts:
+export class CBindingComponent {
+  public isRequired=true
+}
+
+css:
+.textColor{
+    color: green;
+}
+
+But here we have to apply multiple styles of css file to a typescript property
+
+eg:
+html:
+<h2 [class.textColor]="isRequired">Hello World</h2>
+
+ts:
+export class CBindingComponent {
+  public isRequired=true
+}
+#################################################################################
+html:
+<h2 [class]="myStyleGroup">Hello World</h2>
+
+ts:
+export class CBindingComponent {
+  
+  public isRequired=true
+  
+  public myStyleGroup = {
+	"textColor":this.isRequired,
+	"textSize":this.isRequired,
+	"textStyle":this.isRequired
+  }
+}
+
+css:
+.textColor{
+    color: green;
+}
+
+.textSize{
+    font-size: 40px;
+}
+
+.textStyle{
+    font-style: italic;
+}
+
+Q)can we use [class] binding for groupStyling
+A)It will work but its not the right way of doing
+we have to use [ngClass] instead of [class]
+
+eg:
+html:
+<h2 [ngClass]="myStyleGroup">Hello World</h2>
+
+ts:
+export class CBindingComponent {
+  
+  public isRequired=true
+  
+  public myStyleGroup = {
+	"textColor":this.isRequired,
+	"textSize":this.isRequired,
+	"textStyle":this.isRequired
+  }
+}
+
+css:
+.textColor{
+    color: green;
+}
+
+.textSize{
+    font-size: 40px;
+}
+
+.textStyle{
+    font-style: italic;
+} 
+
+Q)How to apply only some styles in groupStyling
+A)By using ! condition to the non required ones
+
+public myStyleGroup = {
+	"textColor":this.isRequired,
+	"textSize":!this.isRequired, //important: this won't be applied as we use negate symbol
+	"textStyle":this.isRequired
+  }

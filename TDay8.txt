@@ -1,0 +1,103 @@
+Q)How to install angular
+A)npm install -g @angular/cli
+
+we can test whether angular got installed or not
+cmd>ng version
+
+Q)How to create new angular application
+A)cmd>navigate to your folder >ng new appName --strict=false
+strict mode is true from angular 13 version onwards
+
+Q)where is your project location in your system
+A)C:\practice\MyAngularProjects
+Currently working on Potato
+
+Q)How to import project in vs-code
+A)open vs-code --> File --> open Folder --> navigate to the project folder --> ok
+
+Q)How to run the application
+A)
+way 1:
+ng serve
+Then console will tell where our application is running. We have to take that url and use in browser
+
+way 2:
+ng server -o
+Then application will get opened in the browser automatically.  
+
+way 3:
+wellsfargo
+ask
+
+Q)is it good practice to point to jquery javascript or install
+A)install is better
+
+point:
+we can copy the link in jquery website and mention in index.html. But we may face versioning issues in the future.
+
+install:
+cmd>yourApp>npm install jquery --save
+Then installed files will get loaded into appName/node_modules folder
+Then we have to update in angular.json --> build obj --> styles[] scripts[]
+
+eg:
+"styles": [
+  "src/styles.css",
+  "node_modules/bootstrap/dist/css/bootstrap.min.css"
+],
+"scripts": [
+  "node_modules/jquery/dist/jquery.min.js",
+  "node_modules/bootstrap/dist/js/bootstrap.min.js"
+]
+
+Q)if we install more than one framework like bootstrap and jquery, then bootstrap may not work, why?
+A)we will mention both the javascript frameworks in scripts array of build obj
+if we mention bootstrap first, then jquery
+Then if there is any same name in both frameworks, then the second one will replace the first one. In these cases, bootstrap may not work as expected. That's why we have to load as per our requirement 
+
+Q)Can we install more than one framework at a time
+A)yes
+eg:npm install framework1 framework2 --save
+we just need to use space in between each framework
+
+Q)which framework is better to learn bootstrap or angular material
+A)angular material. because all the projects are moving from bootstrap to angular
+
+Q)How to add angular material to our project
+A)ng add @angular/material
+Then it will check our installed angular application version and installs the compatible angular/material version.
+
+Q)how to install angular
+A)
+->install nodejs
+Goto https://nodejs.org/en/download
+download msi file
+just double click and follow next ...
+
+we can check whether nodejs got installed properly or not by using
+node --version
+
+Then we can use npm command in command prompt
+
+->npm install -g @angular/cli
+->To add angular material to our project
+ng add @angular/material
+
+Q)what should we do if nodejs software didn't work i.e.,
+node is recognized as an internal or external command...
+A)double click the nodejs msi --> click repair
+C:\Users\srini\Desktop\VASU\personal\job\workspace\MyStudy\study\FrontEnd\Angular\rsk
+
+Q)what is angular material website
+A)https://material.angular.io/
+
+Q)Do we need to update angular material related url in angular.json
+A)No.
+We have to update only the third party libraries like bootstrap, Jquery..etc
+But we don't need to update angular material, It comes automatically once the installation gets completed.
+
+
+
+
+
+

@@ -1,0 +1,19 @@
+Q)what is pipe
+A)it takes data and transforms for display purpose, but not changes actual data
+
+eg:- sRiNivas Gunda
+lowercase: {{name | lowercase}} --> srinivas gunda
+uppercase: {{name | uppercase}} --> SRINIVAS GUNDA
+titlecase: 
+slice
+
+{{person | json}}
+
+{{6.78912 | number:'2.2-3'}} --> 06.789
+0 will be appended if we need more.
+
+{{0.75 | percent}} --> 75%
+{{25 | currency}} --> by default currency will come in dollars
+{{25 | currency:'INR'}} --> ok note:-INR is currency code for indian rupee 
+For dates : short, shortDate, mediumDate, shortTime ..etc
+((myDate | date: 'mediumDate'))

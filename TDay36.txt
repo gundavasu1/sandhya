@@ -1,0 +1,2 @@
+Q)How to provide relative url to previous folder
+A)this._router.navigate(['../', {id: this.courseId}, {relativeTo: this._activatedRoute});

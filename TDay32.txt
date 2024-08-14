@@ -1,0 +1,35 @@
+Q)what are route parameters
+A)consider we have two components in which we have to send data from one component data to another. we can send with the help of url parameters
+
+html:
+<h3 *ngFor="let x of cDetails" (click)="onSelect(x)" ><
+	{{x.id}} -- {{x.name}} -- {{x.fee}}
+/h3>
+
+course-details.component.ts:
+
+constructor(private _cService : CourseService, private _router:Router){
+
+}
+
+onSelect(x){
+	this._router.navigate(['/pathName',x.id]);
+}
+
+app-routing.module.ts
+eg:
+{
+	path: 'pathName/:parameterName',
+	component: OurComponentName
+}
+
+
+Q)How to retrieve the route parameters from url
+A)By using ActivatedRoute from @angular/route package
+ngOnInit(){
+	this._activatedRoute.snapshot.paramMap.get('id')
+}
+Note:- since we need to get the id while rendering the component. 
+
+Q)what is standalone component
+A)Came from Angular14

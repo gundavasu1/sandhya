@@ -1,0 +1,86 @@
+Q)what kind of brackets are we using in Angular
+A)
+{} - method definition
+{{}} - interpolation
+[] - property binding
+() event binding
+
+Q)what is template reference variable? explain with demo
+A)There may be lot of input tags in html page. consider we want to read that value in typescript. To identify the particular input tag, we use template reference variable. It is just like id in html tag.
+
+html:
+<input #msg>
+<button mat-raised-button color="warn" (click)="myClickEvent(msg.value)">Click Me</button>
+{{myVar}}
+
+ts:
+export class RVariablesComponent {
+
+  public myVar=''
+
+  public myClickEvent(myFormalMsg){
+    this.myVar=myFormalMsg
+  }
+}
+
+explanation:-
+-> we are providing a name to the input tag i.e., "msg" with the help of template reference variable concept
+-> we have a button to perform an event, so that the input value is sent to the typescript method. if we mention msg, then input tag will be sent. That's why we used msg's value attribute
+-> typescript method will capture the entered data and assigns to its class variable
+-> displaying the typescript variable in html using interpolation
+
+Q)How coloring can be chosen in css
+A)we will mention what type of color we need in css file 
+h2{
+	color : blue;
+}
+Here we are telling the color name directly.
+We can also tell the required color with the help of code. eg: #code, where code is of 6 or 3 char long
+all colors is made up of 3 colors i.e., Red, Green, Blue
+It uses hexadecimal number system
+if we use 6 char code, then each color will get two chars
+if we use 3 char code, then each color will get 1 char
+hexadecimal number system starts with 0 and ends with f
+0 1 2 3 4 5 6 7 8 9 0 a b c d e f
+if we use the left most number i.e., 0, we are going to use that much amount of that color
+in the same way, right.
+
+eg:
+#000
+first char 0 : red : i want to use 0 units of red in this combination
+second char 0 : green : i want to use 0 units of green in this combination
+third char 0 : blue : i want to use 0 units of blue in this combination
+
+since we are not using any of rgb, we will get black color
+
+Q)what module we have to import to use ngModel
+A)FormsModule
+
+Q)explain two-way-binding with demo
+A)when we enter some data in UI, it should get displayed in UI without any event
+we have to use ngModel for two-way-binding
+To use ngModel, we have to import FormsModule in app.module.ts
+
+eg:
+app.module.ts
+import { FormsModule } from '@angular/forms';
+imports: [
+    FormsModule
+  ]
+  
+html:
+<h2>Two Way Data Binding</h2>
+<input [(ngModel)]="myMsg">
+<h2>{{myMsg}}</h2>
+
+ts:
+export class TwoWayDataBindingComponent {
+  public myMsg=''
+}
+
+explanation:-
+-> To use two way binding, we have to use ngModel which is available in FormsModule
+we have to use banana brackets i.e., square brackets with paranthesis
+Here we created a input tag and it will get copied into class file.
+We are displaying the value using interpolation 
+So, if we change at one place, both the places will get updated.

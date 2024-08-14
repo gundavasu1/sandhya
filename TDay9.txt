@@ -1,0 +1,46 @@
+Q)Explain the flow of angular application
+A)
+step :
+control goes to main.ts
+step :
+control can understand which module to get loaded by using bootstrap i.e., AppModule
+step :
+Then control goes to app.module.ts where it can understand the bootstrap component is AppComponent
+step :
+Then control goes to the components typescript i.e., app.component.ts. Here it can understand the template file, css file, selector
+step :
+Then it checks where this selector is used
+step :
+It can be found in the app-root selector in index.html
+step :
+Then whatever we mention in app.component.html will get displayed in browser
+Since we mentioned <app-root> tag in index.html, control will find the corresponding html file (app.component.html) of this tag by using typescript file i.e., app.component.ts
+
+In simple way, we will place our custom components in app.component.html 
+Then they were displayed accordingly
+
+Q)How do we call the files ts, css, html, spec
+A)ts : class file
+html : view file
+spec : test file
+css : style file
+
+Q)In how many ways we can call our components in app.component.html
+A)three ways
+
+way1: as custom element
+selector as tag
+
+selector: 'app-test'
+<app-test></app-test>
+
+way2: as class property value for any element
+selector: '.app-test'
+<div class="app-test"></div>
+Note:- we kept a dot in front of selector
+
+way3: as property of an element
+selector: '[app-test]'
+<div app-test></div>
+Note:- we have enclosed the selector in square brackets.
+

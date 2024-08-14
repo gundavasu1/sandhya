@@ -1,0 +1,16 @@
+Q)which module is needed to place http request
+A){HttpClientModule} from '@angular/common/http'
+
+Q)Do we need to register HttpClientModule in app module to use
+A)yes. Otherwise we cannot use even inject in service 
+
+app.module.ts
+--------------
+import {HttpClientModule} from '@angular/common/http'
+
+imports[HttpClientModule]
+
+Q)write pseudo code for returning data from service
+A)getCourseDetails(): Observable<courseInterface[]>{
+	this._http.get<courseInterface[]>(this._dataURL);
+}

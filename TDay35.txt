@@ -1,0 +1,23 @@
+Q)what is relative url
+A)if the url starts without forward slash, then it is relative url
+
+Q)what is absolute url
+A)if the url start with forward slash, then it is absolute url
+
+Q)what is the issue with absolute url
+A)whenever there is a requirement to change the url 
+If we just change the url in routing module, then it may not work. Because we need to change in all the components wherever we are using.
+
+Q)How relative url overcomes the url change issue
+A)Usually we will do with absolute path as
+
+myMethod(){
+	this._router.navigate(['/courseDetails', {id: this.courseId}]);
+}
+
+we have to use activatedRoute in case of relative url i.e.,
+this._router.navigate([{id: this.courseId}, {relativeTo: this._activatedRoute});
+
+Note:-In absolute path, we will mention the url first, then we will write parameters
+But in relative path, we will mention parameters first, then url using activatedRoute
+ 

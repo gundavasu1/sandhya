@@ -1,0 +1,22 @@
+Q)From Angular 13/14 onwards, strict mode is true by default. How can you make as false
+A)tsconfig.json --> make false wherever you see x+strict+x
+In the same way, do in angular.json file
+
+Q)Can we have children to some component
+A)Yes
+Usually we will mention all the paths in app-routing.module.ts file
+Here we will have another property called children 
+
+eg:
+
+{
+	path: 'courseDetails/:id',
+	component: SelectedCourseComponent,
+	children:[
+		{
+			general way
+		},
+		{
+		}
+	]
+}

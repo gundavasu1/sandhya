@@ -1,0 +1,60 @@
+Q)explain child to parent interaction
+A)
+step 1:-
+consider child is child component
+app is parent component as usual.
+
+when we try to send message from parent to child, we can see the child tag in parent html. 
+But we cannot have parent tag in child html.
+That's why we have to use a different method i.e., event binding.
+
+step 2:
+child.component.html:-
+<button (click)="onClick()">Click Me</button>
+
+step 3:
+child.component.ts:-
+export class ChildComponent {
+  @Output() public childMsg=new EventEmitter()
+
+  onClick(){
+    this.childMsg.emit("child message");
+  }
+}
+
+step 4:
+app.component.html
+<app-child (childMsg)="inComingMessage=$event"></app-child>
+{{inComingMessage}}
+
+step 5:
+app.component.ts
+export class AppComponent {
+  inComingMessage
+}
+
+explanation:-
+step 2:
+we are doing event binding on child component
+
+step 3:
+catching the event of child component.
+this method will send the child component message to parent component
+That's why we are using 
+this.childMsg.emit("child message")
+
+since emit method is present in EventEmitter class, we have to create EventEmitter instance
+Then with the help of the instance, we can use emit method to send the child message
+
+step 4:-
+<app-child (childMsg)="inComingMessage=$event"></app-child>
+Here childMsg is just like a cover.
+actual data comes through $event
+we are assigning the $event to parent component typescript variable
+
+step 5:-
+parent component typescript variable "inComingMessage" got the data from its html page
+Then we are displaying this variable data in UI with the help of interpolation
+
+Q)where should we write the input and output decorators
+A)Both should be written in child side whether parent is sending or receiving

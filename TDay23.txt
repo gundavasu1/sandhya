@@ -1,0 +1,27 @@
+Q)How to skip tests while creating the component
+A)Angular 13 : --skip-tests=true
+before : --skipTests=true
+
+Q)How to display a component based on the button click
+A)
+app.component.html
+
+<button mat-raised-button color="primary" routerLink="/courseNames">Course Names</button>
+<button mat-raised-button color="warn" routerLink="/courseDetails">Course Details</button>
+<router-outlet></router-outlet>
+
+explanation:
+-> whenever the user clicks the "Course Names" button, control tries to find the corresponding link mentioned in routerLink i.e., app-routing.module.ts
+-> And displays accordingly
+-> we can also see that url is getting changed each time when we click the button
+
+Q)what are the ways to display a particular component based on button click
+A)
+way 1:
+<button mat-raised-button color="primary" routerLink="/courseNames">Course Names</button>
+
+way 2:
+<button mat-raised-button color="primary" [routerLink]="'/courseNames'">Course Names</button>
+i.e., using propertyBinding for routerLink 
+using single quotes inside double quotes
+

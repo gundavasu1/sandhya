@@ -1,0 +1,58 @@
+Q)Difference between promise and observable
+A)
+promise:- emits single value at a time
+observable:- emits multiple values over a period of time
+
+promise:- eager
+observable:- lazy
+
+promise:- not cancellable (important point)
+observable:- cancellable using unsubscribe() which stops the listener from receiving further values
+
+promise:- no operations
+observable:- forEach, filter, reduce, retry, retryWhen, delay
+
+promise:-push errors to the child promise
+observable:-deliver errors to the subscribers 
+
+Q)wap to show how to cancel the subscription in observable
+A)
+export class Test1Component implements OnInit{
+  ngOnInit(): void {
+    let o = new Observable(o => {
+      setTimeout(()=>{
+          console.log("observable starts")
+          o.next("satish")
+          o.next("konduru")
+      },4000)
+    });
+    o.subscribe(v => console.log(v)).unsubscribe()
+  }
+}
+
+output:
+observable starts
+
+remaining won't print as we have unsubscribe
+
+Q)write typescript code to get data from promise and observable
+A)
+export class Test1Component implements OnInit{
+  
+  public course: any = [];
+  private _dataURL="../../../assets/sharedData/course.json"
+  constructor(private _http: HttpClient){
+
+  }
+  ngOnInit(): void {
+    this.getData();
+  }
+  getData(){
+    //by using promise
+    //this._http.get(this._dataURL).toPromise().then(res => this.course=res)
+
+    //by using observable
+    this._http.get(this._dataURL).subscribe(res => this.course=res);
+  }
+
+}

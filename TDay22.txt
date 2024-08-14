@@ -1,0 +1,64 @@
+Q)what is the use of using suggestions while writing code
+A)auto import of required classes
+
+Q)what if we don't choose routing while creating the application
+A)just get the skeleton of app-routing.module.ts file in internet
+and mention the module in app.module.ts
+
+Q)what is base href
+A)It is present in index.html i.e., forward slash
+we don't need to write the forward slash after http://localhost:4200
+
+Q)what is routing
+A)It allows us to naviate to which component we like.
+we will configure all the paths in routes array of app-routing.module.ts
+
+Q)explain <router-outlet></router-outlet>
+A)It should be present in app.component.html
+
+Q)How to configure routes in angular application
+A)
+step 1:
+app.component.html
+<router-outlet></router-outlet>
+
+step 2:
+we have configure all our required routes in const array of app-routing.module.ts
+const routes: Routes = const routes: Routes = [
+	{
+		path: '',
+		redirectTo: '/home', //url redirect to other 
+		pathMatch: 'full'
+	},
+	{
+		path: 'if',
+		component: IfComponent //http://localhost:4200/if
+	},
+	{
+		path: 'switch',
+		component: SwitchComponent //http://localhost:4200/switch
+	},
+	{
+		path: 'home',
+		component: TestComponent //http://localhost:4200/test
+	},
+	{
+		path: '**',
+		component: PageNotFoundComponent //http://localhost:4200/pageNotFound
+	}
+];
+
+explaination:
+-> whenever we try to run the application using http://localhost:4200, it tries to load the app component
+-> Then it displays all the configured components in app.component.html
+-> Here we have mentioned the tag <router-outlet></router-outlet>
+-> Then control knows that user has configured a list of components in the routes array of app-routing.module.ts
+-> Then however we request in the browser, that url will get executed from top to botton of routes array
+-> if we provide the url http://localhost:4200
+Then it matches the path: ''
+Then it found redirect url
+Then it tries to find redirect url in the const array and executes
+-> we have to put the default path '**' at the end as every url will matches and our application fails
+
+Note:-
+we gave path as 'home', but configured component as "TestComponent". Its upto us to put whatever the path we want. 

@@ -1,0 +1,81 @@
+Q)How to save all files at a time vscode ide
+A)ctrl + shift + s
+
+Q)what is style binding
+A)applying the style to a tag through typescript property
+eg:
+html:
+<h2 [style.color]="myColor">Hello World</h2>
+
+ts:
+export class SBindingComponent {
+ public myColor='blue'
+}
+
+Q)Difference between class binding and style binding
+A)in class binding, we will provide the css to the html tag using 3 files i.e., html, ts and css 
+But in style binding, we will do the same with 2 files i.e., html, ts
+
+Q)whats the difference between inline styles vs classes
+A)The point of CSS is to separate the content (HTML) from the presentation (CSS). It's all about accessibility and code reuse.
+If we use class, we can reuse that again and again because it has to see css
+If we use style, we cannot reuse as it presents inline of html tag
+
+Q)Can we provide style binding using single files
+A)yes
+<h2 [style.color]="'blue'">Hello World</h2>
+Note:- 
+->Here we are giving the value to style instead of property name, so control hasn't need to go to typescript
+->To provide value directly, we have to put in single quotes
+->But we have to put double quotes for property values in html file
+->That's why we are using single quotes inside double quotes i.e. "''"
+
+Q)write a program to provide font-size using style binding to a tag
+A)Usually we can do like below
+<h2 [style.color]="'blue'">Hello World</h2>
+
+so, replacing color with font-size i.e., 
+<h2 [style.font-size]="'blue'">Hello World</h2>
+But it won't work.
+Because we should not use hiphens. Instead we can use camel case 
+
+so,
+<h2 [style.fontSize]="'blue'">Hello World</h2>
+
+Q)wap to use style font-size binding conditionally
+A)
+html:
+<h2 [style.fontSize]="myRequired ? '30px' : '80px'">Hello World</h2>
+
+ts:
+export class SBindingComponent {
+ public myRequired=true
+}
+
+explanation:-
+Here we are using ternary operator i.e., <condition> ? trueStatement : falseStatement
+
+Q)How to apply group style
+A)
+html:
+<h2 [ngStyle]="myStyleGroup">Hello World</h2>
+
+ts:
+export class SBindingComponent {
+ 
+ public myStyleGroup={
+  
+  color:'red',
+  fontSize:'50px',
+  fontStyle:'italic',
+  fontWeight:'bold'
+ 
+ }
+}
+
+Note:- Here we are using ngStyle instead of style. 
+even style works, but it is good practice to use ngStyle
+
+
+
+

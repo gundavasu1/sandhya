@@ -1,0 +1,63 @@
+Q)How to define a variable and constant
+A)let x=10;
+const y=20;
+
+Q)Do we need to end the line with semicolon in typescript
+A)No
+
+Q)explain primitive datatypes of typescript
+A)boolean, number, string, any
+
+Q)what is the numerical value for boolean
+A)any non-zero number is true including positive and negative value. 
+zero means false.
+we can use true or false directly also
+
+let isFresher=true
+
+Q)explain number datatype
+A)let total=100
+we are not allowed to reassign to non numeric value. Because typescript will decide the datatype automatically
+
+Q)Can we reassign one datatype to another datatype
+A)no
+
+Q)Can we tell what datatype we are going to keep
+A)yes
+let varName : datatype
+eg:
+let isFresher : boolean
+
+Q)Can we declare and define the variable on same line
+A)let isFresher : boolean = false
+
+Q)string datatype name String or string
+A)all small letters
+
+Q)what is type inference
+A)if typescript decides the type by looking the data i.e., we haven't mentioned the datatype
+
+Q)what is any datatype
+A)we can save any kind of datatype
+eg: let abc
+
+Q)is it recommend to use any datatype? explain
+A)No. 
+we have to use any datatype when there is no other chance.
+Because for each datatype, we will have some methods
+Then suggetions will come based on datatype. 
+For any datatype, we don't get any suggetions
+
+Q)Should we assign string data in single or double quotes
+A)both are fine
+
+Q)How can we assign a string to a variable which has multiple lines
+A)we have to use backticks i.e., tilde switch
+
+Q)How can we print the value of variable in a string
+A)by using backticks and expression ${}
+eg:
+let x = `my name is ${name}. I am an engineer`
+
+Q)what is the recommended way to enclose in string
+A)backticks

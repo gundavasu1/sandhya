@@ -1,0 +1,71 @@
+Q)what is other name for custom directives
+A)Attributes directives
+
+Q)How to create directives
+A)ng g d customDirectives/changeColor
+
+Q)How many files will get created when we try to create directives
+A)2 files
+one is directives
+another is spec
+
+Q)provide an example for custom directives
+A)
+import { Directive, ElementRef } from '@angular/core';
+
+@Directive({
+  selector: '[appChangeColor]'
+})
+export class ChangeColorDirective {
+
+  constructor(private _element: ElementRef) { 
+    this._element.nativeElement.style.color='blue'
+  }
+
+}
+
+html:
+<h1 appChangeColor> Work</h1>
+
+output:
+we will get the output in blue which we specified in directive
+
+Q)How to change color dynamically based on events
+A)
+html:
+<h1 appChangeColor> Work</h1>
+
+class:
+import { Directive, ElementRef, HostListener } from '@angular/core';
+
+@Directive({
+  selector: '[appChangeColor]'
+})
+export class ChangeColorDirective {
+
+  constructor(private _element: ElementRef) { 
+    this._element.nativeElement.style.color='blue'
+  }
+
+  @HostListener('mouseenter') mouseEnter(){
+    this.changeColor('red')
+  }
+
+  @HostListener('mouseleave') mouseLeave(){
+    this.changeColor('green')
+  }
+
+  changeColor(color){
+    this._element.nativeElement.style.color=color
+  }
+
+}
+
+explanation:-
+Initially data will get displayed in blue
+when we mouseenter the displayed data, then converted to red color
+when we mouseleave the displayed data, then converted to green color
+ 
+
+
+

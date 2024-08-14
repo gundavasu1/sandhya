@@ -1,0 +1,9 @@
+Q)How to update angular application from version to another
+A)
+-> go to update.angular.io
+-> select from and to drop downs
+-> select the difficulty level i.e. Basic/Medium/Advanced
+-> select required check boxes
+-> click the button "Show me how to update"
+-> It will show some steps
+-> you can check the check boxes after completing each step. This step is just for your reference

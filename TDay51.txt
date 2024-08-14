@@ -1,0 +1,64 @@
+Q)Explain component interaction with @ViewChild
+consider a parent component is there with two buttons "Increment" & "Decrement"
+consider a child component is there with a variable counter.
+when we click the buttons in parent, child component variable i.e., counter should get changed accordingly and display in parent component
+
+A)
+app.component.html
+-------------------
+<app-my-parent></app-my-parent>
+
+my-parent.component.html
+------------------------
+<h1>Parent Component</h1>
+
+<h3>
+    counter from Child Component: {{child?.counter}}
+</h3>
+
+<button mat-raised-button color="warn" (click)="parentIncrement()">Increment</button>
+<button mat-raised-button color="primary" (click)="parentDecrement()">Decrement</button>
+<app-my-child #childView></app-my-child>
+
+my-parent.component.ts
+-----------------------
+export class MyParentComponent{
+
+  @ViewChild('childView') child: MyChildComponent
+
+  parentIncrement(){
+    this.child.childIncrement()
+  }
+
+  parentDecrement(){
+    this.child.childDecrement()
+  }
+  
+}
+
+my-child.component.html
+-----------------------
+<h1>Child Component</h1>
+
+my-child.component.ts
+-----------------------
+export class MyChildComponent{
+
+  public counter=0
+
+  childIncrement(){
+    this.counter++
+  }
+
+  childDecrement(){
+    this.counter--
+  }
+  
+}
+
+explanation:-
+--------------
+->parent has a handle to child in html file
+->created a variable to child in parent class i.e.,
+@ViewChild('childView') child: MyChildComponent
+->parent is calling child class methods via parent class methods with the help of child variable

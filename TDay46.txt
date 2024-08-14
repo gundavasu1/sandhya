@@ -1,0 +1,21 @@
+Q)what is component lifecycle
+A)Every angular component has 8 lifecycle hooks.
+with the help of these hooks, we can track the component.
+
+Q)what are the list of lifecycle hooks
+A)
+ngOnChanges()
+ngOnInit()
+ngDoCheck()
+ngAfterContentInit()
+ngAfterContentChecked()
+ngAfterViewInit()
+ngAfterViewChecked()
+ngOnDestroy()
+
+Q)Do we use all lifecycle hooks in realtime project
+A)Generally we use only 4 i.e., 
+ngOnChanges()
+ngOnInit()
+ngAfterViewInit()
+ngOnDestroy()

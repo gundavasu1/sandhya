@@ -1,0 +1,70 @@
+Q)what are actual and formal parameters
+A)calling method parameters are actual, whereas called method parameters are formal
+
+Q)Can we change names of actual and formal parameters
+A)yes
+
+Q)what is object
+A)we can store multiple properties which are part of regular datatypes
+
+Q)write a sample for object
+A)let objRef = {
+		propertyName : propertyValue,
+		propertyName : propertyValue,
+		....
+	}
+eg:
+	let p = {
+		firstName : 'Satish',
+		lastName : 'konduru'
+	}
+	
+Q)write a function which takes an object contain firstName & lastName, then print firstName, lastName, fullName
+A)
+
+let p = {
+		firstName : 'Satish',
+		lastName : 'konduru',
+		age : 42
+	}
+
+function fullName(person: {firstName:string, lastName:string, age:number}){
+	console.log(`First Name : ${person.firstName}`)
+	console.log(`Last Name : ${person.lastName}`)
+	console.log(`Full Name : ${person.firstName person.lastName}`
+}
+
+fullName(p);
+
+Q)we can have different names for actual parameters and formal parameters
+But what about object properties
+A)We cannot have different names for object properties. Because we cannot identify which property is mapped to which property
+
+Q)what is interface
+A)interface is nothing but a type of object where it can have all or some properties of object
+
+Q)consider we have a function which takes an object as parameter which contains 100 properties but needed only 2 properties to process. Do we need to mention the entire object prototype or there any remedy
+A)interface is the remedy
+
+let p = {
+		firstName : 'Satish',
+		lastName : 'konduru',
+		age : 42
+	}
+
+function fullName(person: myPerson){/*important: we are not sending all properties of object. Instead, we are sending only required by using interface concept */
+	console.log(`Full Name : ${person.firstName person.lastName}`
+}
+
+interface myPerson{
+	firstName : string,
+	lastName : string
+}
+
+fullName(p);
+
+Q)which is preferable way of sending object or interface
+A)interface because it improves the performance, decreases developer work, code readability
+
+Q)what is class
+A)blueprint of object

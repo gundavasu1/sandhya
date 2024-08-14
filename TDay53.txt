@@ -1,0 +1,244 @@
+Q)How component communication will occur
+A)@Input
+@Output
+services
+subject
+BehaviorSubject
+@ViewChild
+@ViewChildren
+Content Projection with <ng-content> directive
+@ContentChild
+@ContentChildren
+
+Q)what is ElementRef
+A)In Content Projection, we can move either an element (or) elements with same template reference (or) component 
+
+if element, we have to use ElementRef
+eg:
+@ContentChild('myHeader') contentHeader: ElementRef
+
+if elements with same template reference
+eg:write properly
+@ContentChildren('myHeader')
+
+if component
+eg:
+@ContentChild('myHeader') contentHeader: ChildComponent
+
+Q)Explain ngAfterContentInit() lifecycle hook
+A)Consider we are doing content projection from parent to child
+here parent contains data whereas child is a widget which receive data from parent and display
+
+So, we cannot see data in widget while we are rendering in UI i.e., we cannot see in ngOnInit() lifecycle hook
+eg:
+ngOnInit(): void {
+    console.log('ngOnInit '+this.contentHeader)
+  }
+  
+we can see data only after it receive from parent i.e., we can see in ngAfterContentInit() lifecycle hook
+eg:
+ngAfterContentInit(): void {
+    console.log('ngAfterContentInit '+this.contentHeader)
+    this.contentHeader.nativeElement.setAttribute('style', 'color:red')
+  }
+
+
+Q)Do content projection by applying some styles
+A)If we want to move the elements from parent html to child html, we can do with content projection
+But if we want to apply some styles to the displaying content in the middle, then we have to acquire the elements in child class file, then display
+
+we have to use @ContentChild in child component to receive elements from parent to child. Here the elements should have a template reference variable.
+@ContentChild('myHeader') contentHeader: ElementRef
+
+Then with the help of ElementRef, we can access in ngAfterContentInit() lifecycle hook.
+	ngAfterContentInit(): void {
+		console.log('ngAfterContentInit '+this.contentHeader)
+	}
+We can apply anything once we receive the element in child
+
+example:
+---------
+
+app.component.html
+------------------
+<app-product></app-product>
+
+product.component.html
+----------------------
+<div class="row">
+    <div class="col-md-6">
+        <h3>60% off</h3>
+        <app-p-widget [products]="products"></app-p-widget>
+    </div>
+    <div class="col-md-6">
+        <h3>80% off</h3>
+        <app-p-widget [products]="topProducts"></app-p-widget>
+    </div>
+</div>
+
+product.component.ts
+----------------------
+export class ProductComponent {
+
+  public products = [
+    {id: 1, name: 'Laptop', price: '20000'},
+    {id: 2, name: 'Mobile', price: '15000'},
+    {id: 3, name: 'Fashion', price: '25000'},
+    {id: 4, name: 'Clothes', price: '10000'}
+  ]
+
+  public topProducts = [
+    {id: 1, name: 'toy1', price: '20000'},
+    {id: 2, name: 'toy2', price: '15000'},
+    {id: 3, name: 'toy3', price: '25000'},
+    {id: 4, name: 'toy4', price: '10000'}
+  ]
+}
+
+p-widget.component.html
+----------------------
+<div>
+    <ul class="list-group" *ngFor="let prod of products">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            {{prod.name}}
+            <span class="badge bg-primary rounded-pill">{{prod.price}}</span>
+        </li>
+    </ul>
+</div>
+
+p-widget.component.ts
+----------------------
+export class PWidgetComponent {
+  @Input() products=[]
+}	
+
+Q)Explain ngAfterContentInit() lifecycle hook with example to move single element 
+A)
+app.component.html
+------------------
+<app-product></app-product>
+
+
+product.component.html
+----------------------
+<div class="row">
+    <div class="col-md-6">        
+        <app-p-widget [products]="products">
+			<h3 class="header" #myHeader>60% off</h3>
+			<a href="" id="link">Visit Store</a>
+		</app-p-widget>
+    </div>
+    <div class="col-md-6">        
+        <app-p-widget [products]="topProducts">
+			<h3 class="header">80% off</h3>
+			<a href="" id="link">See more</a>
+		</app-p-widget>
+    </div>
+</div>
+
+p-widget.component.ts
+---------------------
+export class PWidgetComponent implements OnInit, AfterContentInit{
+
+  @ContentChild('myHeader') contentHeader: ElementRef
+  @Input() products=[]
+
+  ngOnInit(): void {
+    console.log('ngOnInit '+this.contentHeader)
+  }
+
+  ngAfterContentInit(): void {
+    console.log('ngAfterContentInit '+this.contentHeader)
+    this.contentHeader.nativeElement.setAttribute('style', 'color:red')
+  }
+}
+
+p-widget.component.html
+-----------------------
+<div>
+	<ng-content></ng-content>
+		<ul class="list-group" *ngFor="let prod of products">
+			<li class="list-group-item d-flex justify-content-between align-items-center">
+				{{prod.name}}
+				<span class="badge bg-primary rounded-pill">{{prod.price}}</span>
+			</li>
+		</ul>
+	<ng-content></ng-content>
+</div>
+
+Q)Explain ngAfterContentInit() lifecycle hook with example to move multiple elements
+A)
+app.component.html
+------------------
+<app-product></app-product>
+
+
+product.component.html
+----------------------
+<div class="row">
+    <div class="col-md-6">        
+        <app-p-widget [products]="products">
+			<h3 class="header" #myHeader>60% off</h3>
+            <p #myHeader>today only</p>
+			<a href="" id="link">Visit Store</a>
+		</app-p-widget>
+    </div>
+    <div class="col-md-6">        
+        <app-p-widget [products]="topProducts">
+			<h3 class="header">80% off</h3>
+			<a href="" id="link">See more</a>
+		</app-p-widget>
+    </div>
+</div>
+
+product.component.ts
+--------------------
+export class ProductComponent {
+
+  public products = [
+    {id: 1, name: 'Laptop', price: '20000'},
+    {id: 2, name: 'Mobile', price: '15000'},
+    {id: 3, name: 'Fashion', price: '25000'},
+    {id: 4, name: 'Clothes', price: '10000'}
+  ]
+
+  public topProducts = [
+    {id: 1, name: 'toy1', price: '20000'},
+    {id: 2, name: 'toy2', price: '15000'},
+    {id: 3, name: 'toy3', price: '25000'},
+    {id: 4, name: 'toy4', price: '10000'}
+  ]
+}
+
+p-widget.component.html
+-----------------------
+<div>
+	<ng-content></ng-content>
+		<ul class="list-group" *ngFor="let prod of products">
+			<li class="list-group-item d-flex justify-content-between align-items-center">
+				{{prod.name}}
+				<span class="badge bg-primary rounded-pill">{{prod.price}}</span>
+			</li>
+		</ul>
+	<ng-content></ng-content>
+</div>
+
+p-widget.component.ts
+---------------------
+export class PWidgetComponent implements OnInit, AfterContentInit{
+
+  @ContentChildren('myHeader') contentHeader: QueryList<any>
+  @Input() products=[]
+
+  ngOnInit(): void {
+    console.log('ngOnInit '+this.contentHeader)
+  }
+
+  ngAfterContentInit(): void {
+    console.log('ngAfterContentInit '+this.contentHeader)
+    this.contentHeader.first.nativeElement.setAttribute('style', 'color:red')
+    this.contentHeader.last.nativeElement.setAttribute('style', 'color:blue')
+  }
+}
+
+Note:- Here we are moving multiple elements, we are telling first element and last element

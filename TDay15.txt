@@ -1,0 +1,132 @@
+Q)what is event binding
+A)This is also one way binding but from view to class
+
+Q)what is angular material
+A)material.angular.io
+angular has provided a list of components for ready to use
+
+Q)How to change theme in angular
+A)Theme means "how to provide colors and styles to the components". eg: button
+Angular already have updated this in angular.json file --> build object
+If we update to the required theme and save --> it will get compiled and work with new theme
+
+Q)How can we use angular material in our application
+A)consider we want to use a inbuilt button component in our application.
+Then 
+--> go to angular material website i.e., material.angular.io 
+--> click components 
+--> click button 
+--> click API 
+--> copy api reference for angular button i.e., import {MatButtonModule} from '@angular/material/button'; 
+--> we have to import in app module i.e., app.module.ts
+import {MatButtonModule} from '@angular/material/button';
+--> Then we have to copy this new module i.e., MatButtonModule in imports array
+
+eg:-
+html:
+<button mat-raised-button color="primary">Angular Button</button>
+
+app.module.ts
+import {MatButtonModule} from '@angular/material/button'; 
+
+Now we have to add this MatButtonModule in imports[] i.e., in same app.module.ts
+
+Q)How to increase readability for material modules by not referring each and every thing in app module
+A)
+if we do like this, then there will be lot of imports in app.module.ts which may trouble readability
+Instead we can create our own module and refer our module in app module.
+--> create new module 
+--> cmd>application>ng g m modules/material 
+--> Then control will check whether we have modules folder in application folder or not. if there, then creates new module i.e., material in it. Otherwise, creates modules folder, then creates our module 
+--> Then we have to mention angular material related information in our new module and import our new module in root module
+--> material.module.ts
+import { NgModule } from '@angular/core';
+import {MatButtonModule} from '@angular/material/button';
+
+const materialComponents=[
+  MatButtonModule
+]
+@NgModule({
+  declarations: [],
+  imports: [
+    materialComponents
+  ],
+  exports:[
+    materialComponents
+  ]
+})
+export class MaterialModule { }
+Note:-
+-->Here we have an import statement which we copied from angular material website i.e., 
+import {MatButtonModule} from '@angular/material/button';
+--> Then we copied this module i.e., MatButtonModule and pasted in imports and exports array
+--> created a const array and mentioned this module i.e.,
+const materialComponents=[
+  MatButtonModule
+]
+--> Then we will mention our custom module in root module i.e.,
+app.module.ts
+import { MaterialModule } from './modules/material/material.module';
+Then place "MaterialModule" in imports array
+--> Then you are ready to use in your application
+before adding material class to our button : <button>Angular Material</button>
+after adding material class to our button <button mat-flat-button color="primary">Angular Material</button>
+
+Q)what is imports and exports while we use a custom module
+A)Instead of putting all the required modules(eg: button) from material into app module, we are creating a separate custom module and importing from material. Then we are exporting this module to the root module i.e., app-module 
+
+So, if we directly want to get the material module into app-module, then we will put that module in imports array
+
+If we want to use our own custom module, we will import the material module into our custom module. That's why we need to use imports array. Then we have to export the material module to app-module. That's why we need to place the material module in exports array. Then in the app.module.ts, we will just mention the custom module instead of each material module which increases readability. So, in app.module.ts, we have to add our custom module in imports array.
+
+Q)what is development mode and production mode
+A)our angular application can run in two modes i.e.,
+development mode : searches in internet for required files
+production mode : searches only in nodemodules folder for required files. Then application can run in offline
+
+Q)How can we change mode in our application
+A)
+we can check our application mode in 
+application --> environment.ts environment const
+By default, it will be in development mode i.e.,
+production: false
+if we make 
+production: true
+Then our application will run in production mode
+
+Q)what is event binding
+A)user will perform lot of events in UI
+Then we have to capture that event and perform some business logic
+
+we have to enclose the event in paranthesis.
+
+eg:
+html:
+<button (click)="onClick()">Angular Material</button>
+
+ts:
+export class EBindingComponent {
+
+  onClick(){
+    console.log("you clicked this button")
+  }
+}
+
+Q)wap to click a button and receive a message in UI
+A)
+html:
+<button (click)="onClick()">Angular Material</button>
+{{msg}}
+
+ts:
+export class EBindingComponent {
+	
+	public msg=''
+  onClick(){
+    this.msg='you clicked this button'
+  }
+}
+
+Note:- Here we are using two one-way binding i.e., 
+html to ts (event binding)
+ts to html (interpolation)

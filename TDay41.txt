@@ -1,0 +1,126 @@
+Q)what is promise
+A)These are not lazy and execute immediately after creation
+
+Q)what is Observable
+A)These are lazy. That's why these are not executed until we do subscribe
+
+Q)explain promise with an example
+A)
+example:-
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-test1',
+  templateUrl: './test1.component.html',
+  styleUrls: ['./test1.component.css']
+})
+export class Test1Component implements OnInit{
+  
+  ngOnInit(): void {
+    let p = new Promise(r => {
+      console.log("promise starts .......");
+    });
+  }
+}
+
+output:-
+when we open the console, we can see the output as
+"promise starts...."
+Because ngOnInit will get executed whenever we render the component in UI. we don't even need to call Promise.
+Here we have callback function inside paranthesis of Promise
+
+example:-
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-test1',
+  templateUrl: './test1.component.html',
+  styleUrls: ['./test1.component.css']
+})
+export class Test1Component implements OnInit{
+  
+  ngOnInit(): void {
+    let p = new Promise(r => {
+      console.log("promise starts .......");
+      r("This is promise");
+    });
+    p.then(v => console.log(v));
+  }
+
+}
+output:-
+promise starts .......
+This is promise
+
+explanation:-
+promise callback function will get executed, then we can see output
+"promise starts ......
+Then we are sending data to the promise i.e., "This is promise"
+This information will be taken into "then" function
+That's why we will see "This is promise" later
+
+example:-
+let p = new Promise(p => {
+      p("Angular")
+      p("react")
+      p("vue")
+    })
+    p.then(v => console.log(v))
+  }
+  
+output:-
+Angular
+
+explanation:-
+It will emit values only once  
+
+Q)explain Observable with an example
+A)
+example:-
+export class Test1Component implements OnInit{
+  
+  ngOnInit(): void {
+    let o = new Observable(o => {
+      console.log("observable starts")
+    });
+  }
+}
+
+output:-
+we cannot see any output in console as we are not subscribing
+
+example:-
+export class Test1Component implements OnInit{
+  
+  ngOnInit(): void {
+    let o = new Observable(o => {
+      console.log("observable starts");
+      o.next("This is observable");
+    });
+    o.subscribe(v => console.log(v));
+  }
+}
+
+output:-
+observable starts
+This is observable
+
+example:-observable emits multiple values
+export class Test1Component implements OnInit{
+  ngOnInit(): void {
+    let o = new Observable(o => {
+      console.log("observable starts");
+      o.next("Angular");
+      o.next("React");
+      o.next("Vue");
+    });
+    o.subscribe(v => console.log(v));
+  }
+}
+
+output:-
+observable starts
+Angular
+React
+Vue
+

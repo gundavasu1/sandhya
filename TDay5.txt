@@ -1,0 +1,57 @@
+Q)explain mixed datatype i.e., union of datatypes
+A)we can assign multiple datatypes to a single variable
+let x : number | boolean
+x will accept either number or boolean
+Like this we can mention any no.of datatypes
+
+Q)what is the difference between
+let x : number | boolean | string
+let y : any
+A)we can get suggestions for x but not for y
+
+Q)what is the output of
+function add(x, y){
+	return (x+y)
+}
+
+console.log(add(10,20))
+
+A) 30
+
+Q)what is the output of
+function add(x, y){
+	return (x+y)
+}
+
+console.log(add(10,'Satish'))
+A)10Satish
+
+Q)what is the output of
+function add(x:number, y:number){
+	return (x+y)
+}
+
+console.log(add(10,'Satish'))
+A)compilation error
+we are sending 'string' but receiver is expecting 'number'
+recommended way is mentioning datatype
+
+Q)what is optional parameter
+A)we have to put ? mark before colon 
+
+function add(x:number, y?:number){
+	if(y){
+		return (x+y)
+	}else{
+		return x
+	}
+}
+
+console.log(add(10))
+
+Q)Is there any restriction on optional parameter
+A)it should be last parameter. Otherwise we cannot identify which is optional and which is required parameter
+
+Q)Can we have any no.of optional parameters
+A)yes, but all of them we should mention at the end.
+Then it will consider one-to-one

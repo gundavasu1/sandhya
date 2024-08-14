@@ -1,0 +1,240 @@
+Q)what is OnInit methods
+A)when we are rendering the method in UI i.e., adding this component into DOM
+
+Q)what is OnDestroy method
+A)when we are removing the component from DOM
+
+Q)what lifecycle hooks are available both in components and directives
+A)ngOnChanges
+ngOnInit
+ngDoCheck
+
+But components will have all hooks
+
+Q)consider we have parent component child component in we placed parent component in app.component.html and we placed child component in parent tag
+Then how the constructors and ngOnInit methods will get executed
+A)
+app.component.html
+<app-my-parent></app-my-parent>
+
+app-my-parent.component.html
+<app-my-child></app-my-child>
+
+app-my-child.component.html 
+<h1>Child Component</h1>
+
+app-my-parent.component.ts
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-my-parent',
+  templateUrl: './my-parent.component.html',
+  styleUrls: ['./my-parent.component.css']
+})
+export class MyParentComponent implements OnInit{
+
+  constructor(){
+    console.log("My Parent Constructor Running ...")
+  }
+
+  ngOnInit(): void {
+    console.log("My Parent OnInit Running ...")
+  }
+
+}
+
+
+app-my-child.component.ts
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-my-child',
+  templateUrl: './my-child.component.html',
+  styleUrls: ['./my-child.component.css']
+})
+export class MyChildComponent implements OnInit{
+
+  constructor(){
+    console.log("Child Constructor  Running ...")
+  }
+
+  ngOnInit(): void {
+    console.log("Child OnInit  Running ...")
+  }
+
+}
+
+output:-
+My Parent Constructor Running ...
+my-child.component.ts:11 Child Constructor  Running ...
+my-parent.component.ts:15 My Parent OnInit Running ...
+my-child.component.ts:15 Child OnInit  Running ...
+
+Q)explain with program for memory leak
+A)
+app.component.html
+<app-my-parent></app-my-parent>
+
+app-my-parent.component.html
+<app-my-child *ngIf="isChild"></app-my-child>
+<button mat-raised-button color="warn" (click)="toggleChild()">Toggle Child</button>
+
+app-my-child.component.html 
+<h1>Child Component</h1>
+
+app-my-parent.component.ts
+export class MyParentComponent implements OnInit{
+
+  public isChild=false
+
+  constructor(){
+    console.log("My Parent Constructor Running ...")
+  }
+
+  ngOnInit(): void {
+    console.log("My Parent OnInit Running ...")
+  }
+
+  toggleChild(){
+    this.isChild=!this.isChild
+  }
+}
+
+
+app-my-child.component.ts
+export class MyChildComponent implements OnInit, OnDestroy{
+
+  public counter=0
+
+  constructor(){
+    console.log("Child Constructor  Running ...")
+  }
+  ngOnDestroy(): void {
+    console.log("Child destroyed")
+  }
+
+  ngOnInit(): void {
+    console.log("Child OnInit  Running ...")
+    setInterval(() => {
+      this.counter = this.counter+1
+      console.log(this.counter)
+    },1000)
+  }
+
+}
+
+explanation:-
+--> open browser --> http://localhost:4200, then 
+"Parent Component" and button will get displayed on UI
+In console, we can see
+Parent Constructor
+Parent Init
+
+--> since "isChild" property in parentComponent is false by default, we cannot see "Child Component" in UI
+
+--> when we click button, toggleChild() will get called. Then "Child Component" will get loaded onto UI
+Now we can see 
+Child Constructor
+Child Init
+
+-->Now if we click the button again, "Child Component" will get removed. Now the OnDestroy method will get called.
+But whatever the variables that we have in ngOnInit will still be working
+That's why we still see the counter data i.e., 1,2,3...
+
+-->Consider we clicked the button again, then "Child component" will get loaded onto UI
+Now we will see two sets of 1,2,3...etc
+
+We should find a remedy to remove the live variables in OnInit method
+
+output:-
+My Parent Constructor Running ...
+my-parent.component.ts:17 My Parent OnInit Running ...
+core.mjs:26656 Angular is running in development mode.
+my-child.component.ts:14 Child Constructor  Running ...
+my-child.component.ts:22 Child OnInit  Running ...
+my-child.component.ts:25 1
+my-child.component.ts:25 2
+my-child.component.ts:25 3
+my-child.component.ts:17 Child destroyed
+my-child.component.ts:14 Child Constructor  Running ...
+my-child.component.ts:22 Child OnInit  Running ...
+my-child.component.ts:25 4
+my-child.component.ts:25 1
+my-child.component.ts:25 5
+my-child.component.ts:25 2
+my-child.component.ts:25 6
+my-child.component.ts:25 3
+my-child.component.ts:17 Child destroyed
+
+Q)How to handle memory leak once we OnDestroy method gets called
+A)
+app.component.html
+<app-my-parent></app-my-parent>
+
+app-my-parent.component.html
+<app-my-child *ngIf="isChild"></app-my-child>
+<button mat-raised-button color="warn" (click)="toggleChild()">Toggle Child</button>
+
+app-my-child.component.html 
+<h1>Child Component</h1>
+
+app-my-parent.component.ts
+export class MyParentComponent implements OnInit{
+
+  public isChild=false
+
+  constructor(){
+    console.log("My Parent Constructor Running ...")
+  }
+
+  ngOnInit(): void {
+    console.log("My Parent OnInit Running ...")
+  }
+
+  toggleChild(){
+    this.isChild=!this.isChild
+  }
+}
+export class MyChildComponent implements OnInit, OnDestroy{
+
+  public counter=0
+  public myInterval : any
+
+  constructor(){
+    console.log("Child Constructor  Running ...")
+  }
+  ngOnDestroy(): void {
+    console.log("Child destroyed")
+    clearInterval(this.myInterval)
+  }
+
+  ngOnInit(): void {
+    console.log("Child OnInit  Running ...")
+    this.myInterval = setInterval(() => {
+      this.counter = this.counter+1
+      console.log(this.counter)
+    },1000)
+  }
+
+}
+
+explanation:-
+we are assigning the setInterval function to our custom variable. Then whatever the variables we have in setInterval will get stored in our custom variable.
+Then in OnDestroy method, we can click with the clearInterval method which was given by angular itself.
+
+output:-
+My Parent Constructor Running ...
+my-parent.component.ts:17 My Parent OnInit Running ...
+core.mjs:26656 Angular is running in development mode.
+my-child.component.ts:14 Child Constructor  Running ...
+my-child.component.ts:22 Child OnInit  Running ...
+my-child.component.ts:25 1
+my-child.component.ts:25 2
+my-child.component.ts:25 3
+my-child.component.ts:17 Child destroyed
+my-child.component.ts:14 Child Constructor  Running ...
+my-child.component.ts:22 Child OnInit  Running ...
+my-child.component.ts:25 1
+my-child.component.ts:25 2
+my-child.component.ts:25 3
+my-child.component.ts:17 Child destroyed

@@ -1,0 +1,12 @@
+Q)what is observable
+A)whatever the response that comes from server to service is called observable.
+Then service formats the observable and converts accordingly as per the requirement of subscribed components.
+i.e., service won't send data to all the components. It will send data only to the required ones
+
+Q)what is observer
+A)service is called observer which gets data from server and formats the data as required by the components
+
+
+
+
+

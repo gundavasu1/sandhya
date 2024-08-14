@@ -1,0 +1,141 @@
+Q)consider we have a widget component i.e., layout to display information
+consider you have data in another component called product
+Display the product information in widget 
+consider product is the parent of widget
+A)
+app.component.html
+------------------
+<app-product></app-product>
+
+product.component.html
+----------------------
+<div class="row">
+    <div class="col-md-6">
+        <h3>60% off</h3>
+        <app-p-widget [products]="products"></app-p-widget>
+    </div>
+    <div class="col-md-6">
+        <h3>80% off</h3>
+        <app-p-widget [products]="topProducts"></app-p-widget>
+    </div>
+</div>
+
+product.component.ts
+----------------------
+export class ProductComponent {
+
+  public products = [
+    {id: 1, name: 'Laptop', price: '20000'},
+    {id: 2, name: 'Mobile', price: '15000'},
+    {id: 3, name: 'Fashion', price: '25000'},
+    {id: 4, name: 'Clothes', price: '10000'}
+  ]
+
+  public topProducts = [
+    {id: 1, name: 'toy1', price: '20000'},
+    {id: 2, name: 'toy2', price: '15000'},
+    {id: 3, name: 'toy3', price: '25000'},
+    {id: 4, name: 'toy4', price: '10000'}
+  ]
+}
+
+p-widget.component.html
+----------------------
+<div>
+    <ul class="list-group" *ngFor="let prod of products">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            {{prod.name}}
+            <span class="badge bg-primary rounded-pill">{{prod.price}}</span>
+        </li>
+    </ul>
+</div>
+
+p-widget.component.ts
+----------------------
+export class PWidgetComponent {
+  @Input() products=[]
+}
+
+output:
+-------
+You will see two widgets (side by side) in UI 
+
+explanation:-
+-------------
+
+Q)what is <ng-content> or content projection
+A)Allows us to display the information in widget at particular place
+product.component.html
+----------------------
+<div class="row">
+    <div class="col-md-6">        
+        <app-p-widget [products]="products">
+			<h3>60% off</h3>
+			<a>Visit Store</a>
+		</app-p-widget>
+    </div>
+    <div class="col-md-6">        
+        <app-p-widget [products]="topProducts">
+			<h3>80% off</h3>
+			<a>See more</a>
+		</app-p-widget>
+    </div>
+</div>
+
+p-widget.component.html
+----------------------
+<div>
+	<ng-content></ng-content>
+		<ul class="list-group" *ngFor="let prod of products">
+			<li class="list-group-item d-flex justify-content-between align-items-center">
+				{{prod.name}}
+				<span class="badge bg-primary rounded-pill">{{prod.price}}</span>
+			</li>
+		</ul>
+	<ng-content></ng-content>
+</div>
+
+explanation:-
+we are sending two html elements inside widget element of product component.
+Then all the information will get displayed whereever we have <ng-content> in widget
+Here we will see the information at the end as we have placed <ng-content> twice.
+Control first places the information in top. 
+Then it finds another <ng-content> at the end of widget. Then it removes the first one and put at the end.
+That is, we can have the information at one location only.
+
+Q)How to display <ng-content> some above widget and some below widget
+A) we have to use a selector for each of the elements inside widget.
+Then we can use that specific selector in ng-content and display the required information
+Here we using "class" selector for <h3> where as "id" for <a>
+So, <ng-content> will get specific to that selector. So we can show data how ever we want
+
+product.component.html
+----------------------
+<div class="row">
+    <div class="col-md-6">        
+        <app-p-widget [products]="products">
+			<h3 class="header">60% off</h3>
+			<a href="" id="link">Visit Store</a>
+		</app-p-widget>
+    </div>
+    <div class="col-md-6">        
+        <app-p-widget [products]="topProducts">
+			<h3 class="header">80% off</h3>
+			<a href="" id="link">See more</a>
+		</app-p-widget>
+    </div>
+</div>
+
+p-widget.component.html
+----------------------
+<div>
+	<ng-content select=".header"></ng-content>
+		<ul class="list-group" *ngFor="let prod of products">
+			<li class="list-group-item d-flex justify-content-between align-items-center">
+				{{prod.name}}
+				<span class="badge bg-primary rounded-pill">{{prod.price}}</span>
+			</li>
+		</ul>
+	<ng-content select="#link"></ng-content>
+</div>
+

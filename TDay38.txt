@@ -1,0 +1,21 @@
+Q)is angular follows lazy or eager loading
+A)eager loading
+
+Q)How to create a module in lazy way
+A)ng g m moduleName --route moduleName --module app.module.ts
+
+ ng g m moduleName : Generates a module 
+ --route moduleName : creates a lazy loading feature in routing file by path as "moduleName"
+ --module app.module.ts : updates in app.module.ts
+
+eg:
+ng g m modules/faculty --route faculty --module app.module.ts
+ 
+Then it creates 
+faculty.module.ts
+faculty component and its files
+faculty-routing.module.ts
+
+Q)How to check whether module got loaded or not
+A)F12 --> Network --> Filter --> check your module
+Here you can check all the files  

@@ -1,0 +1,80 @@
+Q)what datatypes are there other than string, number, boolean, any
+A)null, undefined
+
+Q)explain null datatype
+A)let x : null = null
+null data means, there is no data and no memory allocation to the variable
+
+Q)explain undefined datatype
+A)let x : undefined = undefined
+undefined data means, there is default data.
+for number: 0
+for boolean : false
+for string : empty
+
+Q)explain 
+let x : boolean = null
+let y : string = undefined
+
+A)
+let x : boolean = null
+no memory is allocated to x, but telling it is of type boolean
+
+let y : string = undefined
+memory is allocated to y, but telling it is of type string. So default value will be there.
+
+Q)what is the output of below code
+let x : number
+x=10
+x=6
+console.log(x)
+A)6
+
+Q)what is Array
+A)To store multiple values
+way 1:
+let varName : number [] = [1,2,3,4,5]
+way 2:
+let varName : Array<number> = [1,2,3,4,5]
+
+Q)Can we store mixed datatype in array
+A)Yes
+let person = ['RSK', 42, true]
+
+Q)Can you write a mixed datatype array including datatype
+A) let x : [string, number, boolean] = ['RSK', 10, false]
+Good way of coding is, writing the datatype first, then values
+
+Q)what is enum
+A)giving user defined names to set of numbers
+
+Q)what is the output
+enum Color{Red, Blue, Green, Yellow}
+let y:Color = Color.Green
+console.log(y)
+A)2
+It will assign series of numbers starting from 0
+
+Q)what is the output
+enum Color{Red=100, Blue, Green, Yellow}
+let y:Color = Color.Green
+console.log(y)
+A)102
+Usually it will start with 0 if we don't give a number
+But here we are assigning a number for the first one
+
+Q)what is the output
+enum Color{Red, Blue=100, Green, Yellow}
+let y:Color = Color.Red
+console.log(y)
+A)0
+It will consider 0 from starting
+And takes the number whatever we assign explicitly.
+
+Q)what is the output
+enum Color{Red, Blue=100, Green, Yellow}
+let y:Color = Color.Green
+console.log(y)
+A)101
+we have to increment after we assign explicitly
+

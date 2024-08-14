@@ -1,0 +1,23 @@
+Q)what is component interation
+A)when two components are interacting with each other. 
+
+Q)explain parent to child interation
+A)consider app component is parent component
+and child is child component
+
+parent will pull the message in a cover and send to child. cover is nothing but property binding
+
+app.component.ts
+public parentMsg='This message is from parent'
+
+app.component.html
+<app-child [cover]="parentMsg"></app-child> 
+
+child.component.ts
+@Input() cover:string
+
+child.component.html
+{{cover}}
+
+explanation:- 
+@Input() tells that this is not your typescript message, but it is from your parent

@@ -1,0 +1,59 @@
+Q)what is the issue in creating object without dependency injection
+A)consider we have a class called car
+And it depends on two more classes like engine and tires
+i.e.,
+class Car{
+	Car(){
+		Engine e = new Engine();
+		 
+		Tire t = new Tire();
+		//setters for t
+	}
+}
+Until this would be fine. But if we want to add a new Constructor for any of Car dependencies, we have to touch Car constructor.
+i.e., consider Engine constructor got changed from 
+Engine e = new Engine(); to Engine e = new Engine(arg1);
+
+Remedy is construct the Engine outside the Car class and provide its reference as argument to Car class. Then it won't be an issue even the dependencies constructor got changed. i.e., We dont need to change Car
+
+class Car{
+	Engine e;
+	Tire t;
+	Car(Engine e, Tire t){
+		this.e = e;
+		this.t = t;
+	}
+}
+
+Q)is there any issue for developer to create dependencies outside the main class
+A)No as long as the objects are not dependent on one another
+Yes if the objects are not independent on one another
+
+eg for No:-
+Engine myEngine = new MyEngine();
+Tire myTire = new Tire();
+A a = new A();
+B b = new B();
+C c = new C();
+............
+............
+Z z = new Z();
+
+eg for Yes:-
+A a = new A();
+B b = new B(a);
+C c = new C(b);
+............
+............
+Z z = new Z(a,b,c);
+
+Here we have to scan through all of the objects and check which one is dependent on another. 
+Then we have to create the objects in a particular order i.e., eg:- we cannot create the Z instance witout creating "a,b,c" instances
+
+It would be a great problem for developer for scanning and completing the code.
+Remedy is framework. 
+framework will do the scanning on developer behalf and providing the instances.
+
+Q)How Angular Framework knows which objects we need and their dependencies
+A)We will register all of our required components with Framework. This is called Container in spring.
+Then it will do the scanning of objects and providing the instances
